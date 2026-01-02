@@ -1,0 +1,133 @@
+.simple-chain-container {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    overflow: hidden;
+    max-height: 600px;
+    /* Scrollable height */
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+}
+
+.simple-table-header {
+    padding: 10px 15px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.simple-table-header h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.simple-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+    /* Example font */
+    font-size: 13px;
+}
+
+.simple-table th {
+    background: #fafafa;
+    color: #555;
+    font-weight: 600;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 2px solid #eee;
+    position: sticky;
+    top: 40px;
+    /* Height of simple-table-header roughly */
+    z-index: 9;
+}
+
+.simple-table td {
+    padding: 8px 10px;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+}
+
+.cell-strike {
+    background: #f9f9f9;
+    font-weight: 700;
+    color: #000;
+}
+
+.cell-ltp {
+    font-weight: 500;
+}
+
+.row-atm {
+    background-color: rgba(255, 235, 59, 0.2);
+}
+
+.row-atm .cell-strike {
+    background-color: rgba(255, 235, 59, 0.4);
+    border: 1px solid #fdd835;
+}
+
+/* Dark Mode Support (Basic) */
+/* Forced White Theme for Simple Chain */
+:global(body.dark) .simple-chain-container {
+    background: #ffffff !important;
+    border-color: #e0e0e0;
+}
+
+:global(body.dark) .simple-table-header {
+    background: #f5f5f5 !important;
+    border-color: #ddd;
+}
+
+:global(body.dark) .simple-table-header h3 {
+    color: #333 !important;
+}
+
+:global(body.dark) .simple-table th {
+    background: #fafafa !important;
+    color: #555 !important;
+    border-bottom-color: #eee;
+}
+
+:global(body.dark) .simple-table td {
+    border-bottom-color: #f0f0f0;
+    color: #333 !important;
+}
+
+:global(body.dark) .cell-strike {
+    color: #000 !important;
+}
+
+/* Flash Animations for Instant Updates */
+@keyframes flash-green {
+    0% {
+        background-color: rgba(0, 255, 0, 0.5);
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+@keyframes flash-red {
+    0% {
+        background-color: rgba(255, 0, 0, 0.5);
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+.flash-up {
+    animation: flash-green 1s ease-out;
+}
+
+.flash-down {
+    animation: flash-red 1s ease-out;
+}

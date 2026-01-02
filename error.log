@@ -1,0 +1,7 @@
+src/api/dhan/optionChain.ts(1,10): error TS2614: Module '"./client"' has no exported member 'DhanClient'. Did you mean to use 'import DhanClient from "./client"' instead?
+src/controllers/optionChainController.ts(13,43): error TS18046: 'error' is of type 'unknown'.
+src/routes/optionChain.ts(5,31): error TS2554: Expected 1 arguments, but got 0.
+src/server.ts(12,22): error TS2554: Expected 0 arguments, but got 1.
+src/services/dhanService.ts(13,76): error TS18046: 'error' is of type 'unknown'.
+src/utils/http.ts(10,48): error TS18046: 'error' is of type 'unknown'.
+src/utils/http.ts(19,49): error TS18046: 'error' is of type 'unknown'.

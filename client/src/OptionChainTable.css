@@ -1,0 +1,890 @@
+/* Symmetric Table Styles */
+.option-chain-outer {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 0;
+    font-family: inherit;
+    transition: background-color 0.3s ease;
+    overflow-x: auto;
+    position: relative;
+}
+
+/* Corner Widget */
+.corner-price-widget {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    pointer-events: none;
+}
+
+.widget-label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.widget-price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.widget-price .val {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.widget-price .chg {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.symmetric-view {
+    border: none;
+    box-shadow: none;
+    max-height: 70vh;
+    overflow-y: auto;
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+}
+
+.symmetric-view::-webkit-scrollbar {
+    width: 6px;
+}
+
+.symmetric-view::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.symmetric-view::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 6px;
+}
+
+.symmetric-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+    min-width: 1200px;
+}
+
+.main-header th {
+    background: linear-gradient(180deg, #0d47a1 0%, #004d40 100%);
+    color: #ffffff;
+    font-weight: 600;
+    padding: 10px 4px;
+    text-align: center;
+    border-bottom: 2px solid var(--primary-color);
+    font-size: 13px;
+    transition: all 0.3s ease;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    white-space: nowrap;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.strike-header-cell {
+    min-width: 80px;
+}
+
+.symbol-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 700;
+}
+
+.scrip-name {
+    color: var(--color-orange);
+}
+
+.offline-badge {
+    background: var(--color-red);
+    color: white;
+    font-size: 9px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-weight: 800;
+    margin: 0 4px;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.scrip-price {
+    color: var(--text-main);
+    font-size: 16px;
+    line-height: 1;
+}
+
+.scrip-price-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.scrip-change {
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.option-row td {
+    padding: 8px 4px;
+    text-align: center;
+    border-bottom: 1px solid var(--table-border);
+    vertical-align: middle;
+    transition: background-color 0.3s ease, border-bottom-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+    color: var(--text-main);
+}
+
+.td-oi .chg,
+.td-ltp .chg {
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.strike-cell {
+    min-width: 60px;
+    background: var(--strike-cell-bg);
+    padding: 0 !important;
+}
+
+.td-strike-center {
+    min-width: 100px;
+    position: relative;
+    padding: 2px 0 !important;
+    background: var(--strike-cell-bg);
+}
+
+.strike-val {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    background: #f0f0f5;
+    border-radius: 4px;
+    font-weight: 700;
+    color: #444;
+    font-size: 13px;
+    min-width: 65px;
+    border: 1px solid #e0e0e5;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+:global(body.dark) .strike-val {
+    background: #2a2e45;
+    color: #ddd;
+    border-color: #3f4465;
+}
+
+.atm-strike-text {
+    color: #ff5252 !important;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.strike-indicator {
+    display: flex;
+    height: 3px;
+    width: 40px;
+    margin: 4px auto 0;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.bar {
+    height: 100%;
+}
+
+.ce-bar {
+    background: var(--color-red);
+}
+
+.pe-bar {
+    background: var(--color-green);
+}
+
+/* ITM Highlights */
+.ce-itm .td-ce,
+.pe-itm .td-pe {
+    background: var(--itm-ce-bg) !important;
+}
+
+/* Zebra Striping */
+.option-row.row-even td {
+    background-color: var(--table-row-even);
+}
+
+.option-row.row-odd td {
+    background-color: var(--table-row-odd);
+}
+
+/* ITM Zebra Overrides */
+.option-row.row-even.ce-itm .td-ce,
+.option-row.row-even.pe-itm .td-pe {
+    background-color: var(--itm-ce-bg-even) !important;
+}
+
+/* ATM Row Highlight with Sticky Positioning (Dual-Sticky) */
+.atm-row {
+    position: sticky;
+    top: 52px;
+    bottom: 0px;
+    z-index: 45;
+    background: #046646 !important;
+    transition: all 0.2s ease;
+}
+
+.atm-row td {
+    background: linear-gradient(rgba(255, 193, 7, 0.3), rgba(255, 193, 7, 0.3)), #046646 !important;
+    border-top: 2px solid rgba(255, 193, 7, 0.8);
+    border-bottom: 2px solid rgba(255, 193, 7, 0.8);
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.2);
+}
+
+/* Dark mode adjustment for ATM row */
+:global(body.dark) .atm-row td {
+    background: linear-gradient(rgba(255, 193, 7, 0.25), rgba(255, 193, 7, 0.25)), rgba(0, 77, 64, 0.4) !important;
+}
+
+/* Dark mode fix for ATM row bg */
+:global(body.dark) .atm-line-row td {
+    background: var(--table-row-odd) !important;
+}
+
+.atm-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 1px 0;
+    background: rgba(255, 152, 0, 0.1);
+    border-top: 1px solid var(--color-orange);
+    border-bottom: 1px solid var(--color-orange);
+    min-height: 20px;
+}
+
+.atm-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-orange);
+    text-shadow: none;
+}
+
+.atm-change {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Change Colors */
+.text-green {
+    color: var(--color-green) !important;
+}
+
+.text-red {
+    color: #ffca00de !important;
+}
+
+/* Responsive Table Adjustments */
+@media (max-width: 1200px) {
+    .symmetric-table {
+        min-width: 1000px;
+    }
+
+    .main-header th {
+        font-size: 10px;
+        padding: 8px 2px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .greek-cell,
+    .greek-header,
+    .td-bid,
+    .th-bid,
+    .td-ask,
+    .th-ask,
+    .td-iv,
+    .th-iv {
+        display: none !important;
+    }
+
+    .symmetric-table {
+        min-width: 500px;
+    }
+
+    .scrip-price {
+        font-size: 14px;
+    }
+
+    .atm-label {
+        font-size: 12px;
+    }
+
+    .strike-val {
+        font-size: 11px;
+        min-width: 55px;
+        padding: 2px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .td-volume,
+    .th-volume {
+        display: none !important;
+    }
+
+    .symmetric-table {
+        min-width: 400px;
+    }
+
+    .atm-label {
+        font-size: 11px;
+    }
+}
+
+/* Footer Controls - Sticky at bottom */
+.controls-footer {
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    background: var(--card-bg);
+    border-top: 1px solid var(--card-border);
+    position: sticky;
+    bottom: 0;
+    z-index: 30;
+    backdrop-filter: blur(8px);
+}
+
+.toggle-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toggle-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/* Switch Styles */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: var(--color-green);
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+}
+
+/* Watermark */
+.option-chain-outer.is-offline {
+    position: relative;
+}
+
+.option-chain-outer.is-offline::after {
+    content: "OFFLINE";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    font-size: 80px;
+    font-weight: 900;
+    color: rgba(255, 82, 82, 0.05);
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.no-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 20px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 24px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+}
+
+.strike-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    /* Increased to ensure room */
+    padding: 4px 0;
+}
+
+/* NEW FLEXBOX CONTAINER FOR BADGES */
+.badge-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 4px;
+    /* Slight padding from edges */
+    margin-bottom: 2px;
+    pointer-events: none;
+    /* Let clicks pass through if needed */
+}
+
+/* AI Recommendation Badges (New Style) */
+.ai-rec-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    font-size: 10px;
+    /* Increased from 8px */
+    font-weight: 900;
+    padding: 3px 6px;
+    /* Increased padding */
+    border-radius: 4px;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    /* Stronger shadow */
+    z-index: 10;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+    animation: pulseBadge 2s infinite;
+    line-height: 1;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    /* Added border for contrast */
+}
+
+.ai-ce {
+    background: linear-gradient(135deg, #00c853, #00e676);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    border: 1px solid #b9f6ca;
+    /* Aligns to left naturally in flex */
+}
+
+.ai-pe {
+    background: linear-gradient(135deg, #d50000, #ff1744);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    border: 1px solid #ff8a80;
+    /* Aligns to right via margin-left: auto if alone, or justify-content: space-between if both present */
+    margin-left: auto;
+}
+
+/* Ensure Call badge stays left even if it's the only one? No, by default it's flex-start. */
+/* PE badge needs margin-left: auto to force it to the right if CE is missing. */
+
+.selection-popup {
+    position: absolute;
+    top: -42px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e223d;
+    border: 1px solid var(--primary-color);
+    padding: 3px;
+    border-radius: 6px;
+    z-index: 999;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    animation: fadeInScale 0.1s ease-out;
+}
+
+.select-btn {
+    border: none;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.ce-btn {
+    background: var(--color-green);
+}
+
+.ce-btn:hover {
+    background: #2ebd7d;
+    transform: translateY(-1px);
+}
+
+.pe-btn {
+    background: var(--color-red);
+}
+
+.pe-btn:hover {
+    background: #f15d5d;
+    transform: translateY(-1px);
+}
+
+.popup-sep {
+    width: 1px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 2px;
+}
+
+.selected-row-highlight {
+    background: rgba(76, 111, 255, 0.08) !important;
+}
+
+/* Selection Indicators (Static Flex) */
+.selection-container {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+    margin-top: 2px;
+}
+
+.selected-indicator {
+    position: relative;
+    /* Static flow */
+    top: auto;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 8px;
+    /* Slightly smaller to fit nicely */
+    font-weight: 800;
+    padding: 1px 5px;
+    border-radius: 8px;
+    color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    z-index: 5;
+    white-space: nowrap;
+}
+
+.side-CE {
+    background: var(--color-green);
+    right: auto;
+    margin-right: 0;
+    left: auto;
+    margin-top: 0;
+}
+
+.side-PE {
+    background: var(--color-red);
+    left: auto;
+    right: auto;
+    margin-top: 0;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+:global(body.dark) .no-data {
+    background: #161a2e;
+    border-color: #24284a;
+    color: #888;
+}
+
+.call-side,
+.put-side {
+    position: relative;
+}
+
+@keyframes pulseBadge {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+    }
+
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+/* Spot Price Line Injection */
+.spot-price-row {
+    height: 0;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    position: relative;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.spot-price-cell {
+    padding: 0 !important;
+    border: none !important;
+    height: 0;
+    overflow: visible;
+    position: relative;
+}
+
+.spot-line-container {
+    padding: 0 !important;
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 101;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.spot-line-graphic {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #444;
+    opacity: 0.8;
+}
+
+.spot-pill {
+    position: relative;
+    background: #222;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    z-index: 102;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+    white-space: nowrap;
+}
+
+:global(body.dark) .spot-line-graphic {
+    background: #ccc;
+    opacity: 0.8;
+}
+
+:global(body.dark) .spot-pill {
+    background: #eee;
+    color: #111;
+    border-color: #999;
+}
+
+/* Flash Animations */
+@keyframes flash-green {
+    0% {
+        background-color: rgba(0, 255, 0, 0.5);
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+@keyframes flash-red {
+    0% {
+        background-color: rgba(255, 0, 0, 0.5);
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+.flash-up {
+    animation: flash-green 0.3s ease-out;
+}
+
+.flash-down {
+    animation: flash-red 0.3s ease-out;
+}
+
+.price-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    min-height: 32px;
+}
+
+.price-val {
+    font-weight: 700;
+}
+
+
+/* Responsive Adjustments */
+
+@media (max-width: 768px) {
+    .corner-price-widget {
+        position: relative;
+        /* Un-stick it so it sits in flow or adjust top */
+        top: 0;
+        right: 0;
+        width: 100%;
+        margin-bottom: 10px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    .symmetric-table {
+        min-width: unset;
+        /* Let it shrink but use scroll */
+        width: max-content;
+        /* Force scroll */
+    }
+
+    .greek-cell,
+    .greek-header {
+        display: none !important;
+    }
+
+    /* Adjust Sticky Header top since we might have moved things */
+    .main-header th {
+        font-size: 11px;
+        padding: 6px 2px;
+        top: 0;
+    }
+
+    .atm-row {
+        top: 35px;
+        /* Adjust based on header height */
+    }
+
+    .option-row td {
+        padding: 6px 2px;
+        font-size: 11px;
+    }
+
+    .scrip-price {
+        font-size: 14px;
+    }
+
+    .strike-val {
+        padding: 2px 6px;
+        min-width: 50px;
+        font-size: 12px;
+    }
+
+    .ai-rec-badge {
+        font-size: 7px;
+        padding: 1px 3px;
+    }
+
+    /* Footer controls stack */
+    .controls-footer {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .toggle-group {
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .option-chain-outer {
+        margin: 0 -10px;
+        /* Negative margin to span full width */
+        border-radius: 0;
+    }
+
+    .strike-val {
+        font-size: 11px;
+        min-width: 40px;
+    }
+
+    /* Hide some more columns if really tight? For now rely on scroll */
+    .td-volume {
+        display: none;
+    }
+
+    .main-header th:nth-child(2),
+    /* Volume Cols */
+    .main-header th:nth-child(8) {
+        display: none;
+    }
+}

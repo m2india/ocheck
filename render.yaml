@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: optionchain-backend
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ACCESS_TOKEN
+        value: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzY3MjQyODgwLCJpYXQiOjE3NjcxNTY0ODAsInRva2VuQ29uc3VtZXJUeXBlIjoiU0VMRiIsIndlYmhvb2tVcmwiOiIiLCJkaGFuQ2xpZW50SWQiOiIxMTA3ODc5MjEyIn0.IY9Ya6wIQs6VyT036dCkUShtO7G5do6xkuRPoUYDUoS5vWnCFCmQivS5PHCi2670mFKdjzma-LS3lh5Adk-tKg
+      - key: CLIENT_ID
+        value: 1107879212
+      - key: BASE_URL
+        value: https://api.dhan.co

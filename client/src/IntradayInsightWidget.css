@@ -1,0 +1,253 @@
+.intraday-insight-card {
+    background: #1e1e2d;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 10px 0;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #eee;
+    transition: transform 0.2s ease;
+}
+
+.intraday-insight-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.insight-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #9fa8da;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.insight-header i {
+    color: #ffd740;
+}
+
+.insight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+}
+
+.insight-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.insight-label {
+    font-size: 11px;
+    color: #90a4ae;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.insight-value {
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.trend-badge {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    width: fit-content;
+    margin-top: 4px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+/* Projection Section */
+.projection-section {
+    margin-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 15px;
+}
+
+.projection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.achievement-pct {
+    font-size: 13px;
+    font-weight: 900;
+    padding: 4px 12px;
+    border-radius: 15px;
+}
+
+.full-width-range {
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.range-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 0 4px;
+}
+
+.price-tag {
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.price-tag span {
+    opacity: 0.5;
+    font-size: 9px;
+    display: block;
+    text-transform: uppercase;
+}
+
+.progress-track {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    opacity: 0.4;
+    transition: width 0.5s ease;
+}
+
+.comet-flow {
+    position: absolute;
+    width: 80px;
+    height: 100%;
+    border-radius: 3px;
+}
+
+.multi-targets {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    scrollbar-width: none;
+    /* Hide scrollbar Firefox */
+}
+
+.multi-targets::-webkit-scrollbar {
+    display: none;
+    /* Hide scrollbar Chrome/Safari */
+}
+
+.target-pill {
+    flex: 0 0 100px;
+    /* Fixed width to allow scrolling if too many */
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 6px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.target-num {
+    font-size: 9px;
+    color: #78909c;
+    text-transform: uppercase;
+}
+
+.target-price {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .intraday-insight-card {
+        padding: 12px;
+    }
+
+    .insight-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .insight-value {
+        font-size: 13px;
+    }
+
+    .projection-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .achievement-pct {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .multi-targets {
+        gap: 6px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+
+    .target-pill {
+        padding: 6px 4px;
+        flex: 0 0 90px;
+        /* Fixed width to ensure they don't squash */
+    }
+
+    .mobile-stack-aware .projection-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .mobile-stack-aware .insight-label {
+        margin-bottom: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .insight-grid {
+        grid-template-columns: 1fr;
+        /* Stack to 1 column for very small screens */
+        gap: 8px;
+    }
+
+    .insight-label {
+        font-size: 10px;
+    }
+
+    .insight-value {
+        font-size: 14px;
+        /* Slightly larger for single column */
+    }
+
+    .range-labels .price-tag {
+        font-size: 12px;
+    }
+
+    .target-pill {
+        flex: 0 0 80px;
+        padding: 4px 2px;
+    }
+
+    .target-price {
+        font-size: 11px;
+    }
+}

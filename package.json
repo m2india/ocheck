@@ -1,0 +1,36 @@
+{
+  "homepage": "https://github.com/m2india/optionchainmaster/home",
+  "name": "dhan-optionchain-project",
+  "version": "1.0.0",
+  "description": "A project to interact with the Dhan API for fetching option chain data.",
+  "main": "src/server.ts",
+  "scripts": {
+    "build": "npm install --prefix client && npm run build --prefix client && tsc",
+    "start": "node dist/server.js",
+    "dev:server": "ts-node src/server.ts",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev --prefix client\"",
+    "test": "jest",
+    "deploy": "npm run build --prefix client && gh-pages -d client/dist"
+  },
+  "dependencies": {
+    "@types/ws": "^8.18.1",
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.22.1",
+    "socket.io": "^4.8.3",
+    "ws": "^8.18.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.9.5",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "gh-pages": "^6.3.0",
+    "jest": "^27.0.0",
+    "ts-jest": "^27.0.0"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}

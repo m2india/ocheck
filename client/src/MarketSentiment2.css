@@ -1,0 +1,279 @@
+.sentiment2-container {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(76, 111, 255, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.sentiment2-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #4c6fff, #9c27b0, #4c6fff);
+    background-size: 200% auto;
+    animation: glow 4s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes glow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+.sentiment2-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.sentiment2-title {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+}
+
+.sentiment2-badge {
+    padding: 4px 12px;
+    border-radius: 4px;
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.sentiment2-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.sentiment2-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.sentiment2-strike-box,
+.sentiment2-confidence-box {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.sentiment2-main .label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 4px;
+}
+
+.sentiment2-main .value {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.sentiment2-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.metric-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+}
+
+.metric-item .label {
+    width: 120px;
+    color: var(--text-secondary);
+}
+
+.metric-item .progress-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    transition: width 0.5s ease;
+}
+
+.metric-item .val {
+    width: 60px;
+    text-align: right;
+    font-weight: 700;
+}
+
+.sentiment2-reason {
+    display: flex;
+    gap: 8px;
+    padding: 10px;
+    background: rgba(76, 111, 255, 0.05);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--primary-color);
+    border-left: 3px solid var(--primary-color);
+}
+
+body.dark .sentiment2-strike-box,
+body.dark .sentiment2-confidence-box {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+body.dark .sentiment2-reason {
+    background: rgba(0, 229, 255, 0.1);
+    border-left-color: #00e5ff;
+    color: white;
+}
+
+body.dark .metric-item .progress-bar {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Target Summary Table */
+.sentiment2-targets-table-wrapper {
+    margin: 12px 0;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sentiment2-targets-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sentiment2-targets-table th {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    padding: 6px 8px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.sentiment2-targets-table td {
+    padding: 6px 8px;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sentiment2-targets-table tr:last-child td {
+    border-bottom: none;
+}
+
+.tf-col {
+    color: #9c27b0 !important;
+    font-weight: 500;
+}
+
+.target-col {
+    font-weight: 600;
+    color: #44cdff !important;
+}
+
+.status-col i {
+    font-size: 14px;
+}
+
+.status-active {
+    font-size: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive Sentiment2 */
+@media (max-width: 768px) {
+    .sentiment2-container {
+        padding: 15px;
+    }
+
+    .sentiment2-header {
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+    }
+
+    .sentiment2-main {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .sentiment2-targets-table-wrapper {
+        overflow-x: auto;
+    }
+
+    .sentiment2-targets-table {
+        min-width: 350px;
+    }
+
+    .metric-item {
+        gap: 10px;
+    }
+
+    .metric-item .label {
+        width: 100px;
+        font-size: 11px;
+    }
+
+    /* Ladder Grid mobile stacking */
+    .sentiment2-ladder-item {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 8px;
+    }
+
+    .metric-item .val {
+        width: 40px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sentiment2-title {
+        font-size: 12px;
+    }
+
+    .sentiment2-main .value {
+        font-size: 16px;
+    }
+
+    .metric-item .label {
+        width: 70px;
+        font-size: 10px;
+    }
+
+    .sentiment2-badge {
+        padding: 2px 8px;
+        font-size: 10px;
+    }
+}

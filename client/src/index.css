@@ -1,0 +1,287 @@
+:root {
+  /* Peacock Feather Palette - Light Mode */
+  --bg-color: #f0fdfa;
+  /* Pale Aqua */
+  --text-main: #002736;
+  /* Deep greenish-black */
+  --text-secondary: #004d40;
+  --text-muted: #4db6ac;
+
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --card-border: #b2dfdb;
+
+  --primary-color: #0d47a1;
+  /* Electric Royal Blue (Neck color) */
+  --primary-hover: #1565c0;
+  --text-on-primary: #ffffff;
+
+  --input-bg: #e0f2f1;
+  --input-border: #26a69a;
+
+  --btn-secondary-bg: #ffffff;
+  --btn-secondary-text: #0d47a1;
+  --btn-secondary-hover: #bbdefb;
+
+  /* Table Colors */
+  --table-header-bg: #e0f7fa;
+  --table-header-text: #01579b;
+  --table-border: #b2ebf2;
+  --table-row-even: #f1f8e9;
+  /* Very light green tint */
+  --table-row-odd: #ffffff;
+  --table-row-hover: #e1f5fe;
+
+  --strike-cell-bg: #e0f7fa;
+  --strike-text: #0d47a1;
+
+  /* ITM/ATM Colors */
+  --itm-ce-bg: #e8f5e9;
+  /* Light Emerald */
+  --itm-pe-bg: #e8f5e9;
+  --itm-ce-bg-even: #c8e6c9;
+  --itm-pe-bg-even: #c8e6c9;
+
+  --atm-glow: rgba(0, 200, 83, 0.3);
+  --atm-border: #00c853;
+  /* Vibrant Emerald */
+
+  /* Semantic Colors */
+  --color-green: #00c853;
+  /* Feather Green */
+  --color-red: #d50000;
+  /* Deep Red */
+  --color-orange: #ffab00;
+  /* Eye Gold */
+}
+
+body.dark {
+  /* Peacock Feather Palette - Dark Mode */
+  --bg-color: #020b12;
+  /* Deepest Midnight Blue/Black */
+  --text-main: #e0f2f1;
+  --text-secondary: #b2dfdb;
+  /* Brighter Aqua */
+  --text-muted: #90a4ae;
+  /* Lighter grey-blue */
+
+  --card-bg: rgba(5, 30, 50, 0.65);
+  /* Glassy Deep Indigo/Teal */
+  --card-border: rgba(0, 229, 255, 0.3);
+
+  --input-bg: rgba(0, 20, 30, 0.8);
+  --input-border: #0091ea;
+
+  --btn-secondary-bg: rgba(13, 71, 161, 0.4);
+  --btn-secondary-text: #80d8ff;
+  --btn-secondary-hover: rgba(0, 176, 255, 0.2);
+
+  /* Table Colors */
+  --table-header-bg: rgba(1, 87, 155, 0.5);
+  /* Royal Blue Tint */
+  --table-header-text: #81d4fa;
+  --table-border: rgba(0, 229, 255, 0.15);
+  --table-row-even: rgba(0, 77, 64, 0.3);
+  /* Emerald Tint */
+  --table-row-odd: transparent;
+  --table-row-hover: rgba(0, 200, 83, 0.15);
+
+  --strike-cell-bg: transparent;
+  --strike-text: #fff;
+
+  /* ITM Colors */
+  --itm-ce-bg: rgba(29, 233, 182, 0.08);
+  /* Teal/Emerald */
+  --itm-pe-bg: rgba(29, 233, 182, 0.08);
+  --itm-ce-bg-even: rgba(29, 233, 182, 0.12);
+  --itm-pe-bg-even: rgba(29, 233, 182, 0.12);
+
+  --atm-glow: rgba(0, 229, 255, 0.6);
+  /* Electric Cyan Glow */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  /* Radiant Peacock Background: Deep Blue center radiating to Emerald and Black */
+  background: radial-gradient(circle at 50% 10%, #0d47a1 0%, #004d40 40%, #000000 90%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.5s ease;
+}
+
+/* Light mode background override */
+body:not(.dark) {
+  background: radial-gradient(circle at 50% 0%, #e1f5fe 0%, #b9f6ca 100%);
+}
+
+.page {
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.form-row.single-line {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .form-row.single-line {
+    display: grid;
+    grid-template-columns: minmax(150px, 220px) minmax(150px, 200px) 1fr;
+    align-items: end;
+  }
+}
+
+.field-item label {
+  font-size: 13px;
+  margin-bottom: 4px;
+  display: block;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+input,
+select,
+button {
+  height: 40px;
+  font-size: 14px;
+}
+
+button {
+  background: var(--primary-color);
+  color: var(--text-on-primary);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background: var(--primary-hover);
+}
+
+button.secondary {
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+}
+
+button.secondary:hover {
+  background: var(--btn-secondary-hover);
+}
+
+.actions-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.actions-inline button {
+  width: 40px;
+  padding: 0;
+}
+
+.auto-refresh {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  border-bottom: 1px solid var(--table-border);
+  text-align: right;
+  color: var(--text-main);
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+.td-strike {
+  font-weight: 700;
+}
+
+@keyframes atmPulse {
+  0% {
+    background: transparent;
+  }
+
+  50% {
+    background: var(--atm-glow);
+  }
+
+  100% {
+    background: transparent;
+  }
+}
+
+.strike-atm {
+  animation: atmPulse 1.5s ease-in-out infinite;
+  border-left: 3px solid var(--atm-border);
+  border-right: 3px solid var(--atm-border);
+}
+
+/* Global Responsive Adjustments */
+@media (max-width: 768px) {
+  .page {
+    padding: 10px;
+  }
+
+  .card {
+    padding: 12px;
+    border-radius: 6px;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+}

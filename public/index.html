@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Option Chain Viewer</title>
+
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+  <div class="page">
+    <h1>Option Chain</h1>
+    <div id="offlineBanner" class="offline-banner">Market appears offline. Showing fallback data.</div>
+    <div id="requestLog" class="status" style="margin-bottom:8px; font-family: monospace;"></div>
+
+    <div class="card">
+      <div class="form-row single-line">
+        <input id="exchangeSegment" type="hidden" />
+
+        <!-- Inside your form-row -->
+        <div class="field-item">
+          <label>Instrumental</label>
+          <select id="securityId">
+            <option value="" selected disabled>Select Symbol</option>
+          </select>
+        </div>
+
+        <div class="field-item">
+          <label>Expiry</label>
+          <input id="expiryDate" type="date" value="" placeholder="Select Expiry" />
+        </div>
+
+
+        <div class="actions-inline">
+
+          <button id="fetchBtn" style="padding: 0 16px; width: auto; background: #2ecc71; color: white; border: none;">
+            Fetch
+          </button>
+
+
+          <button id="clearBtn" class="secondary" title="Clear">
+            <i class="fa fa-trash"></i>
+          </button>
+
+          <button id="densityBtn" class="secondary" title="Compact">
+            <i class="fa fa-compress"></i>
+          </button>
+
+          <button id="themeBtn" class="secondary" title="Dark Mode">
+            <i class="fa fa-moon"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="status" class="status">Ready.</div>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap" id="tableContainer"></div>
+    </div>
+  </div>
+
+  <script>
+    const SCRIP_MASTER = [
+      { id: 13, name: 'NIFTY', segment: 'IDX_I' },
+      { id: 25, name: 'BANKNIFTY', segment: 'IDX_I' },
+      { id: 27, name: 'FINNIFTY', segment: 'IDX_I' }
+    ];
+
+    const DUMMY_DATA = [
+      { strikePrice: 26000, call: { lastPrice: 177.60, lastPricePct: 7.12, openInterest: 23068, changeinOpenInterestPct: -56.85, impliedVolatility: 41.48, delta: 0.99, theta: 4.85, gamma: 0.0003, vega: 0.03, rho: 0.01 }, put: { lastPrice: 0.05, lastPricePct: -99.63, openInterest: 146307, changeinOpenInterestPct: -31.84, impliedVolatility: 41.48, delta: -0.01, theta: -0.15, gamma: 0.0003, vega: 0.03, rho: -0.00 } },
+      { strikePrice: 26050, call: { lastPrice: 125.40, lastPricePct: 5.20, openInterest: 9222, changeinOpenInterestPct: -59.82, impliedVolatility: 32.12, delta: 0.99, theta: 5.40, gamma: 0.0005, vega: 0.05, rho: 0.01 }, put: { lastPrice: 0.10, lastPricePct: -99.70, openInterest: 109045, changeinOpenInterestPct: 1.90, impliedVolatility: 32.12, delta: -0.01, theta: -0.20, gamma: 0.0005, vega: 0.05, rho: -0.00 } },
+      { strikePrice: 26100, call: { lastPrice: 77.20, lastPricePct: -9.55, openInterest: 31871, changeinOpenInterestPct: -55.17, impliedVolatility: 20.89, delta: 0.98, theta: 5.05, gamma: 0.0011, vega: 0.07, rho: 0.01 }, put: { lastPrice: 0.05, lastPricePct: -99.90, openInterest: 248229, changeinOpenInterestPct: 10.09, impliedVolatility: 20.89, delta: -0.02, theta: -0.20, gamma: 0.0011, vega: 0.07, rho: -0.00 } },
+      { strikePrice: 26150, call: { lastPrice: 27.15, lastPricePct: -50.50, openInterest: 109335, changeinOpenInterestPct: -2.50, impliedVolatility: 9.47, delta: 0.96, theta: 5.00, gamma: 0.0057, vega: 0.16, rho: 0.01 }, put: { lastPrice: 22.85, lastPricePct: -71.58, openInterest: 630205, changeinOpenInterestPct: 366.69, impliedVolatility: 9.47, delta: -0.04, theta: -0.30, gamma: 0.0057, vega: 0.16, rho: -0.00 } },
+      { strikePrice: 26200, call: { lastPrice: 0.05, lastPricePct: -99.85, openInterest: 479965, changeinOpenInterestPct: 239.72, impliedVolatility: 8.60, delta: 0.07, theta: -0.45, gamma: 0.0089, vega: 0.23, rho: 0 }, put: { lastPrice: 72.85, lastPricePct: -37.23, openInterest: 167838, changeinOpenInterestPct: 143.30, impliedVolatility: 8.60, delta: -0.93, theta: -5.95, gamma: 0.0089, vega: 0.23, rho: -0.01 } },
+      { strikePrice: 26250, call: { lastPrice: 0.05, lastPricePct: -99.73, openInterest: 156703, changeinOpenInterestPct: 121.85, impliedVolatility: 18.75, delta: 0.01, theta: -0.15, gamma: 0.0010, vega: 0.06, rho: 0 }, put: { lastPrice: 122.75, lastPricePct: -22.33, openInterest: 32167, changeinOpenInterestPct: 152.57, impliedVolatility: 18.75, delta: -0.99, theta: -5.60, gamma: 0.0010, vega: 0.06, rho: -0.01 } }
+    ];
+
+    const securitySelect = document.getElementById('securityId');
+    const segmentInput = document.getElementById('exchangeSegment');
+    const expiryDate = document.getElementById('expiryDate');
+    const tableContainer = document.getElementById('tableContainer');
+    const statusEl = document.getElementById('status');
+
+    expiryDate.value = "2025-12-23";
+
+    SCRIP_MASTER.forEach(s => {
+      const o = document.createElement('option');
+      o.value = s.id;
+      o.textContent = s.name;
+      securitySelect.appendChild(o);
+    });
+
+    // Set default null values
+    securitySelect.value = ""; // default null
+    expiryDate.value = "";     // default null
+
+    // Update onchange to handle nulls
+    securitySelect.onchange = () => {
+      const s = SCRIP_MASTER.find(x => x.id == securitySelect.value);
+      if (s) segmentInput.value = s.segment;
+      else segmentInput.value = null; // clear segment if nothing selected
+      fetchTable();
+    };
+
+    expiryDate.onchange = () => {
+      if (!expiryDate.value) return; // skip fetch if null
+      fetchTable();
+    };
+
+    function formatNumber(v, f = 2) {
+      if (v === undefined || v === null || isNaN(parseFloat(v))) return '-';
+      return Number(v).toLocaleString('en-IN', { minimumFractionDigits: f, maximumFractionDigits: f });
+    }
+
+    function formatPct(v) {
+      if (v === undefined || v === null || isNaN(parseFloat(v))) return '';
+      return (v > 0 ? '+' : '') + Number(v).toFixed(2) + '%';
+    }
+
+    function getChangeClass(v) {
+      if (v < 0) return 'text-red';
+      if (v > 0) return 'text-green';
+      return '';
+    }
+
+    let showGreeks = true;
+
+    // ✅ Add missing setStatus function
+    function setStatus(msg) {
+      statusEl.textContent = msg;
+    }
+
+    function showOffline(message = "Market appears offline. Showing fallback data.", isOffline = true) {
+      const banner = document.getElementById('offlineBanner');
+      if (banner) {
+        banner.textContent = message;
+        banner.style.display = 'block';
+      }
+      if (isOffline) tableContainer.classList.add('is-offline');
+      else tableContainer.classList.remove('is-offline');
+    }
+
+    function hideOffline() {
+      const banner = document.getElementById('offlineBanner');
+      if (banner) banner.style.display = 'none';
+      tableContainer.classList.remove('is-offline');
+    }
+
+    async function fetchTable() {
+      console.log("fetchTable triggered");
+      setStatus("Fetching market data...");
+
+      const scripVal = securitySelect.value;
+      const segVal = segmentInput.value;
+      const expVal = expiryDate.value;
+
+      console.log("Payload data:", { scripVal, segVal, expVal });
+      const logEl = document.getElementById('requestLog');
+      if (logEl) {
+        logEl.textContent = `Last request: ${new Date().toLocaleTimeString()} | Payload: ${JSON.stringify({ UnderlyingScrip: parseInt(scripVal), UnderlyingSeg: segVal, Expiry: expVal })}`;
+      }
+
+      const payload = {
+        UnderlyingScrip: parseInt(scripVal),
+        UnderlyingSeg: segVal,
+        Expiry: expVal
+      };
+
+      try {
+        console.log("Sending POST to /option-chain...");
+        const response = await fetch('/option-chain', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) throw new Error("Market data unavailable 1");
+
+        const marketData = await response.json();
+        console.log("Data received:", marketData);
+        const rows = marketData.options || marketData.rows || [];
+        const spot = marketData.underlyingValue || 26177.15;
+
+        if (!rows || rows.length === 0) throw new Error("No data returned");
+
+        renderSymmetric(rows, spot);
+        hideOffline();
+        setStatus("Loaded live data");
+      } catch (err) {
+        console.warn("Market data fetch failed. Showing dummy data.", err);
+
+        // Auto-calculate spot for dummy data to show ATM near middle
+        const dummySpot = 26177.15;
+
+        setStatus("Market offline. Showing dummy data...");
+        showOffline();
+        if (logEl) {
+          logEl.textContent += ` | Error: ${err?.message || err}`;
+        }
+        renderSymmetric(DUMMY_DATA, dummySpot);
+      }
+    }
+
+    // Keep your renderSymmetric function unchanged
+    function renderSymmetric(rows, spot) {
+      const atmStrike = rows.reduce((prev, curr) =>
+        Math.abs(curr.strikePrice - spot) < Math.abs(prev.strikePrice - spot) ? curr : prev
+      ).strikePrice;
+
+      const selectedOption = securitySelect.options[securitySelect.selectedIndex];
+      const scripName = selectedOption ? selectedOption.text : 'NIFTY';
+
+      tableContainer.innerHTML = `
+      <table class="symmetric-table">
+        <thead>
+          <tr class="main-header">
+            ${showGreeks ? '<th>Rho</th><th>Vega</th><th>Gamma</th><th>Theta</th><th>Delta</th>' : ''}
+            <th>IV</th><th>Call OI</th><th>Call LTP</th>
+            <th class="strike-header-cell">
+              <div class="symbol-info">
+                <span class="scrip-name">${scripName}</span>
+                ${tableContainer.classList.contains('is-offline') ? '<span class="offline-badge">OFFLINE</span>' : ''}
+                <span class="scrip-price">${formatNumber(spot)}</span>
+                <span class="scrip-feed-label" style="font-size: 10px; opacity: 0.8; margin-left: 4px;">${scripName === 'NATURALGAS' ? '(LTP Market Feed)' : ''}</span>
+              </div>
+            </th>
+            <th>Put LTP</th><th>Put OI</th><th>IV</th>
+            ${showGreeks ? '<th>Delta</th><th>Theta</th><th>Gamma</th><th>Vega</th><th>Rho</th>' : ''}
+          </tr>
+        </thead>
+        <tbody>
+          ${rows.map(r => {
+        const ce = r.call || {};
+        const pe = r.put || {};
+        const isAtm = r.strikePrice === atmStrike;
+        const atmLine = isAtm ? `
+              <tr class="atm-line-row">
+                <td colSpan="20">
+                  <div class="atm-indicator">
+                    <span>${formatNumber(spot)}</span>
+                    <span class="text-green">${scripName === 'NATURALGAS' ? '(Market Feed)' : ''} +4.75 (0.02%)</span>
+                  </div>
+                </td>
+              </tr>
+            ` : '';
+
+        return atmLine + `
+              <tr class="option-row">
+                ${showGreeks ? `
+                  <td>${formatNumber(ce.rho)}</td>
+                  <td>${formatNumber(ce.vega)}</td>
+                  <td>${formatNumber(ce.gamma, 4)}</td>
+                  <td>${formatNumber(ce.theta)}</td>
+                  <td>${formatNumber(ce.delta)}</td>
+                ` : ''}
+                <td>${formatNumber(ce.impliedVolatility)}</td>
+                <td class="td-oi">
+                  <div>${formatNumber(ce.openInterest, 0)}</div>
+                  <div class="${getChangeClass(ce.changeinOpenInterestPct)}">${formatPct(ce.changeinOpenInterestPct)}</div>
+                </td>
+                <td class="td-ltp">
+                  <div>₹${formatNumber(ce.lastPrice)}</div>
+                  <div class="${getChangeClass(ce.changeinOpenInterestPct)}">${formatPct(ce.changeinOpenInterestPct)}</div>
+                </td>
+                <td class="td-strike-center ${isAtm ? 'strike-atm' : ''}">
+                  <div class="strike-val">${r.strikePrice}</div>
+                  <div class="strike-indicator"><div class="bar ce-bar" style="width:40%"></div><div class="bar pe-bar" style="width:60%"></div></div>
+                </td>
+                <td class="td-ltp">
+                  <div>₹${formatNumber(pe.lastPrice)}</div>
+                  <div class="${getChangeClass(pe.changeinOpenInterestPct)}">${formatPct(pe.changeinOpenInterestPct)}</div>
+                </td>
+                <td class="td-oi">
+                  <div>${formatNumber(pe.openInterest, 0)}</div>
+                  <div class="${getChangeClass(pe.changeinOpenInterestPct)}">${formatPct(pe.changeinOpenInterestPct)}</div>
+                </td>
+                <td>${formatNumber(pe.impliedVolatility)}</td>
+                ${showGreeks ? `
+                  <td>${formatNumber(pe.delta)}</td>
+                  <td>${formatNumber(pe.theta)}</td>
+                  <td>${formatNumber(pe.gamma, 4)}</td>
+                  <td>${formatNumber(pe.vega)}</td>
+                  <td>${formatNumber(pe.rho)}</td>
+                ` : ''}
+              </tr>
+            `;
+      }).join('')}
+        </tbody>
+      </table>
+      <div class="controls-footer">
+        <label class="toggle-group">
+          <input type="checkbox" ${showGreeks ? 'checked' : ''} onchange="showGreeks = !showGreeks; fetchTable();" />
+          <span>Greeks</span>
+        </label>
+      </div>
+    `;
+    }
+
+    document.getElementById('fetchBtn').onclick = fetchTable;
+    document.getElementById('clearBtn').onclick = () => {
+      tableContainer.innerHTML = '';
+      setStatus("Cleared");
+    };
+
+    document.getElementById('densityBtn').onclick = () =>
+      document.body.classList.toggle('compact');
+
+    document.getElementById('themeBtn').onclick = () =>
+      document.body.classList.toggle('dark');
+
+
+    // Initial fetch with small delay to ensure DOM is fully ready
+    setTimeout(fetchTable, 500);
+  </script>
+
+</body>
+
+</html>

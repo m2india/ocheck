@@ -1,0 +1,353 @@
+/* Market Sentiment Wrapper */
+.market-sentiment-wrapper {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.sentiment-main-card {
+    background: linear-gradient(135deg, #0d47a1 0%, #00695c 100%);
+    /* Peacock Royal Blue to Emerald */
+    border-radius: 8px;
+    padding: 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    width: 100%;
+    position: relative;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ... (top-right strike styles unchanged) ... */
+
+/* Simple Table - Vertical Layout */
+.sentiment-simple-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sentiment-simple-table tbody {
+    background-color: rgba(0, 38, 51, 0.6);
+    /* Deep Teal w/ Transparency */
+}
+
+.sentiment-simple-table thead {
+    background: linear-gradient(90deg, #0d47a1 0%, #004d40 100%);
+    /* Electric Blue to Deep Green */
+}
+
+/* ... (th/td styles) ... */
+
+/* Dark Mode Support */
+body.dark .sentiment-main-card {
+    background: linear-gradient(135deg, #0d47a1 0%, #004d40 100%);
+    /* Deep Peacock Gradient */
+    border-color: rgba(0, 229, 255, 0.2);
+}
+
+body.dark .sentiment-simple-table {
+    background: transparent;
+}
+
+body.dark .sentiment-simple-table td {
+    color: #e0f2f1;
+    border-bottom-color: rgba(0, 229, 255, 0.1);
+}
+
+body.dark .sentiment-simple-table td:first-child {
+    background-color: rgba(0, 20, 30, 0.5);
+    color: #80deea;
+}
+
+/* ... (rest of dark mode styles) ... */
+
+body.dark .ai-sentiment-details {
+    background: linear-gradient(135deg, #002736 0%, #004d40 100%);
+    /* Dark Teal Gradient */
+    border-top: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+/* AI Sentiment Details Footer */
+
+.target-summary-row {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 8px;
+    font-size: 11px;
+}
+
+.sentiment-simple-table th {
+    padding: 6px 10px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.ai-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ai-detail-item strong {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.8;
+}
+
+.ai-detail-item span {
+    font-weight: 600;
+}
+
+/* TimeFrame Column Styling */
+.timeframe-cell {
+    text-align: left !important;
+    font-size: 10px !important;
+    line-height: 1.4;
+    min-width: 140px;
+}
+
+.timeframe-item {
+    display: block;
+    white-space: nowrap;
+}
+
+/* Sentiment Badge Simple */
+.sentiment-badge-simple {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    color: white;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* Table Cell Styling */
+.strike-value {
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.option-type {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffd700;
+    /* Gold */
+}
+
+.entry-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.target-value {
+    font-size: 14px;
+    font-weight: 800;
+    color: #4ade80;
+    /* Bright Green */
+}
+
+.profit-value {
+    font-size: 14px;
+    font-weight: 800;
+    color: #6ee7b7;
+}
+
+.breakeven-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #795548;
+}
+
+.prob-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ff9800;
+}
+
+.rr-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #673ab7;
+}
+
+.timeframe-value {
+    font-size: 12px;
+    font-weight: 400;
+    /* Reduced to normal per request */
+    color: #9c27b0;
+}
+
+.lot-size-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: #3f51b5;
+}
+
+.stop-loss-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ff5252;
+}
+
+.max-loss-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: #d32f2f;
+}
+
+.profit-amount-value {
+    font-size: 14px;
+    font-weight: 800;
+    color: #00c853;
+}
+
+.profit-range-value {
+    font-size: 10px;
+    line-height: 1.5;
+    color: #00897b;
+    font-weight: 600;
+}
+
+/* Best Signal Highlighting */
+.best-signal-row {
+    background-color: rgba(255, 215, 0, 0.08) !important;
+    box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.1);
+}
+
+.pro-badge {
+    background: linear-gradient(135deg, #ffd700 0%, #ffa000 100%);
+    color: #000;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 1px 4px;
+    border-radius: 3px;
+    margin-left: 6px;
+    text-shadow: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Very Strong Signal Highlighting */
+.very-strong-row {
+    background-color: rgba(251, 191, 36, 0.05) !important;
+    animation: pulse-border 2s infinite ease-in-out;
+}
+
+.strength-very-strong {
+    color: #fbbf24;
+    font-weight: 800;
+    text-shadow: 0 0 8px rgba(251, 191, 36, 0.4);
+}
+
+@keyframes pulse-border {
+    0% {
+        background-color: rgba(251, 191, 36, 0.05);
+    }
+
+    50% {
+        background-color: rgba(251, 191, 36, 0.12);
+    }
+
+    100% {
+        background-color: rgba(251, 191, 36, 0.05);
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Hide less critical columns on mobile to prevent horizontal scroll overload */
+    .sentiment-simple-table th:nth-child(5),
+    /* Strategy */
+    .sentiment-simple-table td:nth-child(5),
+    .sentiment-simple-table th:nth-child(6),
+    /* CE Score */
+    .sentiment-simple-table td:nth-child(6),
+    .sentiment-simple-table th:nth-child(7),
+    /* PE Score */
+    .sentiment-simple-table td:nth-child(7),
+    .sentiment-simple-table th:nth-child(8),
+    /* Confidence */
+    .sentiment-simple-table td:nth-child(8),
+    .sentiment-simple-table th:nth-child(9),
+    /* Interpretation */
+    .sentiment-simple-table td:nth-child(9),
+    .sentiment-simple-table th:nth-child(10),
+    /* Type */
+    .sentiment-simple-table td:nth-child(10),
+    .sentiment-simple-table th:nth-child(14),
+    /* Max Loss */
+    .sentiment-simple-table td:nth-child(14),
+    .sentiment-simple-table th:nth-child(15),
+    /* Max Profit */
+    .sentiment-simple-table td:nth-child(15) {
+        display: none;
+    }
+
+    .sentiment-simple-table th,
+    .sentiment-simple-table td {
+        padding: 4px 6px;
+        font-size: 11px;
+    }
+
+    .strike-value {
+        font-size: 14px;
+    }
+
+    .profit-amount-value {
+        font-size: 13px;
+    }
+
+    /* Additional column hiding for very small screens */
+    .sentiment-simple-table th:nth-child(11),
+    /* Entry */
+    .sentiment-simple-table td:nth-child(11),
+    .sentiment-simple-table th:nth-child(13),
+    /* Stop Loss */
+    .sentiment-simple-table td:nth-child(13) {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .sentiment-simple-table th,
+    .sentiment-simple-table td {
+        padding: 4px 4px;
+        font-size: 10px;
+    }
+
+    /* Hide Target column on very small screens, rely on profit/LTP */
+    .sentiment-simple-table th:nth-child(12),
+    .sentiment-simple-table td:nth-child(12) {
+        display: none;
+    }
+}
+
+
+.sentiment-empty-state {
+    text-align: center;
+    padding: 30px 20px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    font-weight: 500;
+    font-style: italic;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 0 0 8px 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+:global(body.dark) .sentiment-empty-state {
+    color: rgba(255, 255, 255, 0.4);
+}
